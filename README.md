@@ -71,11 +71,16 @@ nombre de negocio → **Crear registro** → añade un cliente → registra una 
 | Despliegue del programa | [ver](https://explorer.solana.com/tx/3yQHexxywzYp1hEaFuQnKFbn5ozRcXNRrPGvk8hLVQBh4BpD9mPTULmRFi7whP5ESKgNwrbJitjzQATHpLFgELgN?cluster=devnet) |
 | `crear_registro` | _pendiente: pegar enlace_ |
 | `crear_cliente` | _pendiente: pegar enlace_ |
-| `registrar_venta` | _pendiente: pegar enlace_ |
-| `cambiar_monto` | _pendiente: pegar enlace_ |
-| `hacer_devolucion` | _pendiente: pegar enlace_ |
+| `registrar_venta` | [ver](https://explorer.solana.com/tx/2Vowupd72jTopCQQeBakbsLVHLDptksAzkckcv3LWtMccaDdEfioSbuXjw2SpM8ufa8mr41AvmafJSZXJHWbKZ5E?cluster=devnet) |
+| `cambiar_monto` | [ver](https://explorer.solana.com/tx/2gwfgmTZM5KveNMSSN6u18Hy4ejYQGJuv8pLK57AJVWH3yn3zvrU7xqpC7JSJRCotnQYTYeJb13Kgo49gmqCnFg1?cluster=devnet) |
+| `hacer_devolucion` | [ver](https://explorer.solana.com/tx/3ADf5uA6b32o3yNdnQtR7g6DQGxBiHgAMzjSDr47Q1NM4ci31SZjngwZRDRNwGPuf2WUdmDfv64VCeGbEcSQSSdg?cluster=devnet) |
 
-Capturas de la app en `docs/evidencias/`.
+Capturas (en `docs/evidencias/`):
+
+- `01-registro-creado.png`: registro «Abarrotes Test» creado en Devnet.
+- `02-clientes-y-venta.png`: 3 clientes y 2 ventas activas; el total del negocio ($125.75) es la suma de las ventas activas.
+- `03-cambio-de-monto.png`: tras `cambiar_monto` ($25.75 → $25.85) el total del negocio pasa a $125.85 sin recalcular nada en el cliente.
+- `04-devolucion.png`: tras `hacer_devolucion` el cliente queda con 0 compras y $0.00,; el total del negocio ($125.85) coincide con la suma de las ventas activas ($100.00 + $25.85).
 
 ---
 
