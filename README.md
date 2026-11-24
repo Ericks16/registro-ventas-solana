@@ -69,8 +69,8 @@ nombre de negocio → **Crear registro** → añade un cliente → registra una 
 | Operación | Transacción |
 |---|---|
 | Despliegue del programa | [ver](https://explorer.solana.com/tx/3yQHexxywzYp1hEaFuQnKFbn5ozRcXNRrPGvk8hLVQBh4BpD9mPTULmRFi7whP5ESKgNwrbJitjzQATHpLFgELgN?cluster=devnet) |
-| `crear_registro` | _pendiente: pegar enlace_ |
-| `crear_cliente` | _pendiente: pegar enlace_ |
+| `crear_registro` | [ver](https://explorer.solana.com/tx/2S4ngbfushSb9a6VkRSRK6SbVKrANPrNF1duWWfcWJyBqN4po5R9FzBh29sLwThx9jf7Uv87JctQQkkDhfQXtRNn?cluster=devnet) |
+| `crear_cliente` | [ver](https://explorer.solana.com/tx/2Rce3ZSes4Yuf8KRmfPeTzb8jyZHTQeRLitiNhAuFxf4mppnvwHTqfdhzRogM9GLzXxdEx6J6YUwTR396KZ1Yrru?cluster=devnet) |
 | `registrar_venta` | [ver](https://explorer.solana.com/tx/2Vowupd72jTopCQQeBakbsLVHLDptksAzkckcv3LWtMccaDdEfioSbuXjw2SpM8ufa8mr41AvmafJSZXJHWbKZ5E?cluster=devnet) |
 | `cambiar_monto` | [ver](https://explorer.solana.com/tx/2gwfgmTZM5KveNMSSN6u18Hy4ejYQGJuv8pLK57AJVWH3yn3zvrU7xqpC7JSJRCotnQYTYeJb13Kgo49gmqCnFg1?cluster=devnet) |
 | `hacer_devolucion` | [ver](https://explorer.solana.com/tx/3ADf5uA6b32o3yNdnQtR7g6DQGxBiHgAMzjSDr47Q1NM4ci31SZjngwZRDRNwGPuf2WUdmDfv64VCeGbEcSQSSdg?cluster=devnet) |
@@ -80,6 +80,7 @@ Capturas (en `docs/evidencias/`):
 - `01-registro-creado.png`: registro «Abarrotes Test» creado en Devnet.
 - `02-clientes-y-venta.png`: 3 clientes y 2 ventas activas; el total del negocio ($125.75) es la suma de las ventas activas.
 - `03-cambio-de-monto.png`: tras `cambiar_monto` ($25.75 → $25.85) el total del negocio pasa a $125.85 sin recalcular nada en el cliente.
+- `05-segundo-registro-creado.png` y `06-cliente-creado.png`: registro «TEST de MARQET» creado y primer cliente (#1 Kerly) con 0 compras.
 - `04-devolucion.png`: tras `hacer_devolucion` el cliente queda con 0 compras y $0.00,; el total del negocio ($125.85) coincide con la suma de las ventas activas ($100.00 + $25.85).
 
 ---
