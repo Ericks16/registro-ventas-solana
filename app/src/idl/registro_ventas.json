@@ -1,0 +1,1067 @@
+{
+  "address": "Gm2e8xz2xqS8XkFKXPpaWnohXHufuJ4oTgohtt8tqQGb",
+  "metadata": {
+    "name": "registro_ventas",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Registro de ventas con PDAs jerarquicas en Solana"
+  },
+  "instructions": [
+    {
+      "name": "actualizar_cliente",
+      "discriminator": [
+        203,
+        17,
+        140,
+        69,
+        200,
+        249,
+        196,
+        50
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "signer": true,
+          "relations": [
+            "registro"
+          ]
+        },
+        {
+          "name": "registro",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  111
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "registro.nombre_negocio",
+                "account": "Registro"
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              }
+            ]
+          }
+        },
+        {
+          "name": "cliente",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  108,
+                  105,
+                  101,
+                  110,
+                  116,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "registro"
+              },
+              {
+                "kind": "arg",
+                "path": "id_cliente"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "_id_cliente",
+          "type": "u16"
+        },
+        {
+          "name": "nuevo_nombre",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "cambiar_monto",
+      "discriminator": [
+        138,
+        26,
+        77,
+        29,
+        234,
+        177,
+        71,
+        94
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "signer": true,
+          "relations": [
+            "registro"
+          ]
+        },
+        {
+          "name": "registro",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  111
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "registro.nombre_negocio",
+                "account": "Registro"
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              }
+            ]
+          }
+        },
+        {
+          "name": "cliente",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  108,
+                  105,
+                  101,
+                  110,
+                  116,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "registro"
+              },
+              {
+                "kind": "arg",
+                "path": "id_cliente"
+              }
+            ]
+          }
+        },
+        {
+          "name": "venta",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  101,
+                  110,
+                  116,
+                  97
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "cliente"
+              },
+              {
+                "kind": "arg",
+                "path": "sku"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "_id_cliente",
+          "type": "u16"
+        },
+        {
+          "name": "sku",
+          "type": "string"
+        },
+        {
+          "name": "nuevo_monto",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "cerrar_registro",
+      "docs": [
+        "Cierra el registro y devuelve el rent al owner. Solo si no quedan clientes."
+      ],
+      "discriminator": [
+        131,
+        42,
+        151,
+        125,
+        123,
+        5,
+        37,
+        178
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "registro"
+          ]
+        },
+        {
+          "name": "registro",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  111
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "registro.nombre_negocio",
+                "account": "Registro"
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              }
+            ]
+          }
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "crear_cliente",
+      "discriminator": [
+        55,
+        98,
+        61,
+        156,
+        15,
+        134,
+        174,
+        95
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "registro"
+          ]
+        },
+        {
+          "name": "registro",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  111
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "registro.nombre_negocio",
+                "account": "Registro"
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              }
+            ]
+          }
+        },
+        {
+          "name": "cliente",
+          "writable": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "nombre",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "crear_registro",
+      "discriminator": [
+        93,
+        45,
+        68,
+        224,
+        227,
+        244,
+        209,
+        54
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "registro",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  111
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "nombre_negocio"
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "nombre_negocio",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "eliminar_cliente",
+      "docs": [
+        "Elimina al cliente (cierra su cuenta). Solo si no tiene ventas activas."
+      ],
+      "discriminator": [
+        205,
+        132,
+        251,
+        133,
+        247,
+        51,
+        204,
+        55
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "registro"
+          ]
+        },
+        {
+          "name": "registro",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  111
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "registro.nombre_negocio",
+                "account": "Registro"
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              }
+            ]
+          }
+        },
+        {
+          "name": "cliente",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  108,
+                  105,
+                  101,
+                  110,
+                  116,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "registro"
+              },
+              {
+                "kind": "arg",
+                "path": "id_cliente"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "_id_cliente",
+          "type": "u16"
+        }
+      ]
+    },
+    {
+      "name": "hacer_devolucion",
+      "docs": [
+        "Devolución: cierra la cuenta de la venta, devuelve el rent y revierte acumulados."
+      ],
+      "discriminator": [
+        65,
+        193,
+        244,
+        124,
+        210,
+        201,
+        110,
+        191
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "registro"
+          ]
+        },
+        {
+          "name": "registro",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  111
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "registro.nombre_negocio",
+                "account": "Registro"
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              }
+            ]
+          }
+        },
+        {
+          "name": "cliente",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  108,
+                  105,
+                  101,
+                  110,
+                  116,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "registro"
+              },
+              {
+                "kind": "arg",
+                "path": "id_cliente"
+              }
+            ]
+          }
+        },
+        {
+          "name": "venta",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  101,
+                  110,
+                  116,
+                  97
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "cliente"
+              },
+              {
+                "kind": "arg",
+                "path": "sku"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "_id_cliente",
+          "type": "u16"
+        },
+        {
+          "name": "sku",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "registrar_venta",
+      "discriminator": [
+        47,
+        95,
+        122,
+        187,
+        82,
+        62,
+        119,
+        131
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "registro"
+          ]
+        },
+        {
+          "name": "registro",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  111
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "registro.nombre_negocio",
+                "account": "Registro"
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              }
+            ]
+          }
+        },
+        {
+          "name": "cliente",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  108,
+                  105,
+                  101,
+                  110,
+                  116,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "registro"
+              },
+              {
+                "kind": "arg",
+                "path": "id_cliente"
+              }
+            ]
+          }
+        },
+        {
+          "name": "venta",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  101,
+                  110,
+                  116,
+                  97
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "cliente"
+              },
+              {
+                "kind": "arg",
+                "path": "sku"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "_id_cliente",
+          "type": "u16"
+        },
+        {
+          "name": "sku",
+          "type": "string"
+        },
+        {
+          "name": "descripcion",
+          "type": "string"
+        },
+        {
+          "name": "cantidad",
+          "type": "u16"
+        },
+        {
+          "name": "monto",
+          "type": "u64"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Cliente",
+      "discriminator": [
+        126,
+        253,
+        118,
+        23,
+        130,
+        179,
+        29,
+        228
+      ]
+    },
+    {
+      "name": "Registro",
+      "discriminator": [
+        80,
+        44,
+        41,
+        67,
+        32,
+        150,
+        85,
+        243
+      ]
+    },
+    {
+      "name": "Venta",
+      "discriminator": [
+        46,
+        19,
+        228,
+        71,
+        14,
+        149,
+        86,
+        78
+      ]
+    }
+  ],
+  "events": [
+    {
+      "name": "RegistroCreado",
+      "discriminator": [
+        210,
+        35,
+        77,
+        135,
+        23,
+        248,
+        254,
+        155
+      ]
+    },
+    {
+      "name": "VentaDevuelta",
+      "discriminator": [
+        118,
+        254,
+        236,
+        252,
+        76,
+        111,
+        123,
+        101
+      ]
+    },
+    {
+      "name": "VentaRegistrada",
+      "discriminator": [
+        169,
+        239,
+        74,
+        57,
+        68,
+        71,
+        246,
+        231
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "NoOwner",
+      "msg": "No eres el owner del registro"
+    },
+    {
+      "code": 6001,
+      "name": "VentaNoEnHistorial",
+      "msg": "La venta no está en el historial del cliente"
+    },
+    {
+      "code": 6002,
+      "name": "TextoVacio",
+      "msg": "El texto no puede estar vacío"
+    },
+    {
+      "code": 6003,
+      "name": "TextoLargo",
+      "msg": "El texto excede la longitud máxima permitida"
+    },
+    {
+      "code": 6004,
+      "name": "MontoInvalido",
+      "msg": "El monto debe ser mayor a cero"
+    },
+    {
+      "code": 6005,
+      "name": "CantidadInvalida",
+      "msg": "La cantidad debe ser mayor a cero"
+    },
+    {
+      "code": 6006,
+      "name": "LimiteClientes",
+      "msg": "El registro alcanzó el máximo de clientes"
+    },
+    {
+      "code": 6007,
+      "name": "LimiteHistorial",
+      "msg": "El cliente alcanzó el máximo de ventas activas"
+    },
+    {
+      "code": 6008,
+      "name": "ClienteConVentas",
+      "msg": "El cliente aún tiene ventas activas"
+    },
+    {
+      "code": 6009,
+      "name": "RegistroConClientes",
+      "msg": "El registro aún tiene clientes"
+    },
+    {
+      "code": 6010,
+      "name": "Desbordamiento",
+      "msg": "Desbordamiento aritmético"
+    }
+  ],
+  "types": [
+    {
+      "name": "Cliente",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "registro",
+            "type": "pubkey"
+          },
+          {
+            "name": "id_cliente",
+            "type": "u16"
+          },
+          {
+            "name": "nombre",
+            "type": "string"
+          },
+          {
+            "name": "compras",
+            "type": "u16"
+          },
+          {
+            "name": "total_gastado",
+            "type": "u64"
+          },
+          {
+            "name": "historial",
+            "type": {
+              "vec": "pubkey"
+            }
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Registro",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "nombre_negocio",
+            "type": "string"
+          },
+          {
+            "name": "clientes",
+            "type": {
+              "vec": "pubkey"
+            }
+          },
+          {
+            "name": "id_counter",
+            "type": "u16"
+          },
+          {
+            "name": "total_ventas",
+            "type": "u64"
+          },
+          {
+            "name": "monto_total",
+            "type": "u64"
+          },
+          {
+            "name": "creado_en",
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "RegistroCreado",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "registro",
+            "type": "pubkey"
+          },
+          {
+            "name": "owner",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Venta",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "cliente",
+            "type": "pubkey"
+          },
+          {
+            "name": "sku",
+            "type": "string"
+          },
+          {
+            "name": "descripcion",
+            "type": "string"
+          },
+          {
+            "name": "cantidad",
+            "type": "u16"
+          },
+          {
+            "name": "monto",
+            "type": "u64"
+          },
+          {
+            "name": "fecha",
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "VentaDevuelta",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "registro",
+            "type": "pubkey"
+          },
+          {
+            "name": "cliente",
+            "type": "pubkey"
+          },
+          {
+            "name": "sku",
+            "type": "string"
+          },
+          {
+            "name": "monto",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "VentaRegistrada",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "registro",
+            "type": "pubkey"
+          },
+          {
+            "name": "cliente",
+            "type": "pubkey"
+          },
+          {
+            "name": "sku",
+            "type": "string"
+          },
+          {
+            "name": "monto",
+            "type": "u64"
+          }
+        ]
+      }
+    }
+  ]
+}

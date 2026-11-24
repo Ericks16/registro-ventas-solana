@@ -1,0 +1,65 @@
+:root {
+  --bg: #0f1117;
+  --card: #181b24;
+  --borde: #2a2f3d;
+  --txt: #e8eaf0;
+  --sub: #8b92a5;
+  --prim: #9945ff;
+  --ok: #14f195;
+  --mal: #ff5d6c;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--txt); font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+a { color: var(--ok); }
+code { background: #0b0d12; padding: 1px 6px; border-radius: 4px; font-size: 0.9em; }
+.app { max-width: 1100px; margin: 0 auto; padding: 24px 16px 48px; }
+.cabecera { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
+h1 { margin: 0; font-size: 1.6rem; background: linear-gradient(90deg, var(--prim), var(--ok)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+h2 { margin: 0 0 12px; font-size: 1.1rem; display: flex; justify-content: space-between; align-items: baseline; }
+h2 small { color: var(--sub); font-weight: 400; }
+.sub { margin: 2px 0 0; color: var(--sub); }
+.acciones-cabecera { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.saldo { color: var(--ok); font-variant-numeric: tabular-nums; }
+.tarjeta { background: var(--card); border: 1px solid var(--borde); border-radius: 12px; padding: 18px; margin-bottom: 16px; }
+.vacio { text-align: center; color: var(--sub); }
+.columnas { display: grid; grid-template-columns: minmax(280px, 1fr) 2fr; gap: 16px; align-items: start; }
+@media (max-width: 860px) { .columnas { grid-template-columns: 1fr; } }
+.fila { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.fila.fin { justify-content: flex-end; margin-top: 12px; }
+.grilla { display: grid; grid-template-columns: 110px 1fr 70px 140px auto; gap: 8px; margin-bottom: 12px; }
+.grilla .ancho { min-width: 0; }
+@media (max-width: 700px) { .grilla { grid-template-columns: 1fr 1fr; } }
+input, select { background: #0b0d12; color: var(--txt); border: 1px solid var(--borde); border-radius: 8px; padding: 8px 10px; font: inherit; min-width: 0; }
+input:focus, select:focus { outline: 2px solid var(--prim); outline-offset: -1px; }
+.fila > input { flex: 1; }
+input.corto { width: 90px; flex: none; }
+button { background: #262b3a; color: var(--txt); border: 1px solid var(--borde); border-radius: 8px; padding: 8px 14px; font: inherit; cursor: pointer; }
+button:hover:not(:disabled) { border-color: var(--prim); }
+button:disabled { opacity: 0.45; cursor: not-allowed; }
+button.prim { background: var(--prim); border-color: var(--prim); color: #fff; }
+button.sec { background: transparent; }
+button.peligro { color: var(--mal); background: transparent; }
+button.x { margin-left: auto; background: transparent; border: none; font-size: 1.2rem; padding: 0 6px; }
+.aviso { display: flex; gap: 12px; align-items: center; padding: 10px 14px; border-radius: 10px; margin-bottom: 16px; border: 1px solid; }
+.aviso.ok { border-color: var(--ok); background: #14f19514; }
+.aviso.error { border-color: var(--mal); background: #ff5d6c14; }
+.metricas { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-top: 16px; }
+.metrica { background: #0b0d12; border: 1px solid var(--borde); border-radius: 10px; padding: 10px 12px; display: flex; flex-direction: column; }
+.metrica span { color: var(--sub); font-size: 0.8rem; }
+.metrica strong { font-size: 1.15rem; }
+.nota { color: var(--sub); margin: 10px 0 0; }
+.error { color: var(--mal); margin: 8px 0 0; }
+.lista { list-style: none; padding: 0; margin: 12px 0 0; display: grid; gap: 8px; }
+.lista li { border: 1px solid var(--borde); border-radius: 10px; padding: 8px; }
+.lista li.activo { border-color: var(--prim); background: #9945ff14; }
+.item { width: 100%; display: flex; flex-direction: column; text-align: left; background: transparent; border: none; padding: 4px; }
+.meta { color: var(--sub); font-size: 0.85rem; }
+.mini { display: flex; gap: 6px; margin-top: 6px; }
+.mini button { padding: 3px 10px; font-size: 0.85rem; }
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--borde); vertical-align: middle; }
+th { color: var(--sub); font-weight: 500; font-size: 0.8rem; }
+td.mini { display: table-cell; white-space: nowrap; }
+td.mini button { margin-right: 6px; }
+footer { color: var(--sub); text-align: center; margin-top: 32px; font-size: 0.85rem; }
