@@ -12,6 +12,73 @@ frontend en un solo repositorio y ampliándolos (ver [Qué se agregó](#qué-se-
 
 ---
 
+## Datos de la entrega
+
+| Campo | Detalle |
+|---|---|
+| **Ruta elegida** | Proyecto guiado con una mejora funcional |
+| **Versión de partida** | [Registro-Ventas-Solana-PDA](https://github.com/WayLearnLatam/Registro-Ventas-Solana-PDA) (programa) y [Registro-Ventas-Solana-App](https://github.com/WayLearnLatam/Registro-Ventas-Solana-App) (app) |
+| **Propósito** | Registrar clientes y ventas de un negocio on-chain, con cuentas relacionadas por PDAs y operaciones protegidas por el owner |
+| **Red / Program ID (Devnet)** | `Gm2e8xz2xqS8XkFKXPpaWnohXHufuJ4oTgohtt8tqQGb` ([ver en el explorador](https://explorer.solana.com/address/Gm2e8xz2xqS8XkFKXPpaWnohXHufuJ4oTgohtt8tqQGb?cluster=devnet)) |
+| **Transacción de despliegue** | [`3yQHexxy…LFELgN`](https://explorer.solana.com/tx/3yQHexxywzYp1hEaFuQnKFbn5ozRcXNRrPGvk8hLVQBh4BpD9mPTULmRFi7whP5ESKgNwrbJitjzQATHpLFgELgN?cluster=devnet) |
+
+### Aporte propio (qué se añadió o corrigió y cómo se comprueba)
+
+La base es el registro de ventas guiado (registro → cliente → venta, con la baja de cliente). La mejora es una
+**contabilidad consistente en la cadena, con validaciones de negocio en Rust**:
+
+1. **Acumulados que se mantienen consistentes.** `Cliente.total_gastado`, `Registro.total_ventas` y
+   `Registro.monto_total` se actualizan con aritmética `checked_*` en `registrar_venta`, `cambiar_monto` y
+   `hacer_devolucion`. La versión de partida no llevaba totales.
+   → Test: *«registra ventas y mantiene los acumulados»*, *«cambia el monto y ajusta los acumulados»*,
+   *«hace una devolución y revierte acumulados»*.
+2. **Validaciones de negocio en el programa, con su caso de rechazo.** Monto y cantidad deben ser > 0, texto
+   no vacío y con longitud máxima, límites de clientes e historial.
+   → Tests: *«rechaza monto o cantidad en cero»* (`MontoInvalido`, `CantidadInvalida`) y *«rechaza un nombre de
+   negocio vacío»* (`TextoVacio`).
+3. **Cierres condicionados por una regla.** `eliminar_cliente` solo si no tiene ventas (`ClienteConVentas`) y
+   `cerrar_registro` solo si no quedan clientes (`RegistroConClientes`); ambos devuelven el rent al owner.
+   → Tests: *«no elimina un cliente con ventas activas»* y *«cierra el registro solo cuando no hay clientes»*.
+4. **Modelo ampliado:** `monto` pasa de `u32` a `u64` en centavos, el SKU admite hasta 16 caracteres, la venta
+   guarda `cantidad` y `fecha`, y se guarda el `bump`. Se añadió `actualizar_cliente` y eventos de Anchor.
+
+### Cómo se corresponden con los casos de prueba
+
+| Competencia | Dónde se demuestra |
+|---|---|
+| Creación de cuentas | `crear_registro`, `crear_cliente`, `registrar_venta` |
+| Lectura | La app lee registro, clientes y ventas con `fetch` / `fetchMultiple`; los tests usan `program.account.*.fetch` |
+| Modificación | `actualizar_cliente`, `cambiar_monto` |
+| Permisos (autoridad) | `has_one = owner`; test *«otro wallet no puede operar sobre el registro»* |
+| Pertenencia | Seeds jerárquicas y `bump` en cada contexto; el SKU repetido falla en `init` (*«no permite repetir el mismo SKU»*) |
+| Baja / cierre condicionado | `eliminar_cliente`, `hacer_devolucion`, `cerrar_registro` |
+
+### Cómo probarlo (resumen)
+
+```bash
+bash scripts/docker-anchor.sh test   # 13 tests del programa (requiere Docker)
+cd app && npm install && npm test    # 6 tests de la app
+cd app && npm run dev                # app en http://localhost:5173
+```
+
+En la app: red **Devnet** → conecta Phantom o Solflare en modo devnet (con SOL de https://faucet.solana.com) →
+nombre de negocio → **Crear registro** → añade un cliente → registra una venta → cambia el monto → haz la devolución.
+
+### Evidencias en Devnet
+
+| Operación | Transacción |
+|---|---|
+| Despliegue del programa | [ver](https://explorer.solana.com/tx/3yQHexxywzYp1hEaFuQnKFbn5ozRcXNRrPGvk8hLVQBh4BpD9mPTULmRFi7whP5ESKgNwrbJitjzQATHpLFgELgN?cluster=devnet) |
+| `crear_registro` | _pendiente: pegar enlace_ |
+| `crear_cliente` | _pendiente: pegar enlace_ |
+| `registrar_venta` | _pendiente: pegar enlace_ |
+| `cambiar_monto` | _pendiente: pegar enlace_ |
+| `hacer_devolucion` | _pendiente: pegar enlace_ |
+
+Capturas de la app en `docs/evidencias/`.
+
+---
+
 ## Contenido
 
 1. [Arquitectura](#arquitectura)
